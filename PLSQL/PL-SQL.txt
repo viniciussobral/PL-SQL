@@ -1,0 +1,194 @@
+O PL/SQL é uma linguagem padrão de linguagem procedural
+É uma liguagem de programação voltada ao banco de dados Oracle
+
+Blocos Pl/SQL: Um programa consiste em pelo menos um bloco 
+e os blocos PL/SQL podem ser do seguinte tipo: 
+blocos anônimos 
+Subprogramas
+Estrutura de um bloco
+
+
+Os blocos PL/SQL tem uma estrutura específica composta por três 
+partes distintas: 
+
+Seção declarativa, onde são declarados todas as constantes e variáveis que serão 
+utilizadas na execução do bloco.
+
+Seção de implementação, onde inclui instruções para a execução do bloco pl sql.
+
+Seção de exceções, onde serão tratadas as falhas que ocorram no bloco Pl SQL
+
+Cada umas das partes acima são representadas por palavras reservadas no bloco PL / SQL
+DESSA FORMA:
+
+[declare | is | as ]
+// parte declarativa
+
+begin
+//parte de execução
+
+[exeception]
+//parte de exceções
+
+end; // final do bloco
+
+Dentre essa estrura somente a seção de execução é obrigatória.
+Ela é definida entre as cláusulas BEGIN e END;
+A seguir temos um exemplo de bloco PL/SQL genérico. O bloco anônimo não 
+possui um nome. 
+Podemos indentificar uma bloco anônimo pela sua parte declarativa com o uso da 
+palavra-chave DECLARE.
+
+
+DECLARE 
+//Parte declarativa 
+nome_variavel DATE;
+
+BEGIN
+//parte de execução 
+// Este código atribui o valor da coluna "column_name"
+// Identificado pelo "nome_variavel" nodem da variavel
+
+SELECT SYSDATE
+INTO  nome_variavel
+FROM DUAL;
+
+EXECEPTION
+//parte de exceções
+WHEN OTHERS THEN
+  dbms_output.put_line('erro!!!')
+END;
+
+Operadores:
+
+Operador de atribuição 
+:= (dois + igual)
+
+Operador de passagem de valor para variável
+& 
+
+Operador de concatenação
+||
+
+Operadores artméticos
++ somar 
+/ dividir
+* multiplicar
+- subtrair
+
+Operadores de comparação
+= Igual a
+> maior 
+>= maior igual
+< menor que
+<= menor igual que
+<> diferente de
+
+Operadores lógicos
+O uso do operador lógico faz com que duas condições tenham de produzir 
+um resultado único.
+
+Uma linha só poderá ser retornada se o resultado global de condição for verdadeiro
+O Exemplo abaixo mostra os operadores lógicos:
+AND retorna TRUE se ambas as condições foram verdadeiras
+OR retorna TRUE se uma das condições for verdadeira 
+NOT retorna TRUE se a condição seguinte for falsa.
+
+Seção de Declaração Variáveis
+Nesta parte são declaradas as variáveis necessárias para a execução do nosso
+programa. A variável é declarada através da atribuição de um nome ou
+"identificador", seguido do tipo de dado.
+Nesta seção também são declarados os Cursores, muito utilizados em
+consultas que retornam um grande volume de dados. Podemos declarar
+também exceções definidas pelo usuário. Aqui você também pode especificar
+uma constante, de valor nulo ou com um valor inicial determinado.
+A sintaxe genérica para a declaração de constantes e variáveis é:
+
+nome_variavel [CONSTANT] <tipo_dado> [NOT NULL] [:=valor_inicial]
+
+Tipo_dado: define o tipo de dados da variável ou seja qualquer tipo de dados que a ORACLE Suporta 
+como por exemplo:
+NUMBER, DATE, VARCHAR, CHAR, VARCHAR2, BOOLEAN entre outros.
+Existem tipos de dados (NUMBER E VARCHAR) que pode-se especificar o tamanho do 
+campo que ele vai ocupar
+A clásula CONSTANT indica a definição de uma costante cujo valor não pode ser mudado
+e deve ter uma valor inicial informado em sua declaração;
+A cláusula NOT NULL impede que uma variável seja atrbuída com um valor nulo, e portanto, deve ser inicializado
+com um valor.
+
+Podemos definir o tipo de uma variável ou constante dependendo do tipo de outro idendtificador, usuando 
+cláusulas % TYPE e % ROWTYPE. Normalmente TYPE é usada para declarar variáveis usando cursores.
+
+Cursor BANCO DE DADOS: É uma estrura de controle que permite percorrer sobre os 
+registros em um banco dedados. Os cursores facilitam o processamento subsequente
+em conjunto como percorrimento, tal como recuperação,adição e remoção de registros
+de banco de dados.
+
+Exemplos:
+Estrutura de um bloco anônimo.
+DECLARE
+// Declaração de variavel do tipo VARCHAR2(15) indentifica por v_localização
+     atribuido do valor 3.1416 //
+ 
+
+20 and 23 temperatura Ideal
+Abaixo de 20 ° Frio por demais
+Acima de 23 ° Calor por demais
+
+
+Como calcular porcentagem: guia prático
+Multiplique a porcentagem que você está procurando pelo valor. Por exemplo, se você quer calcular “35% de 500”, multiplique 35 por 500. Fazendo isso você obtém o valor de 35 x 500 = 17500;
+Divida o resultado obtido por 100. No exemplo, teríamos 17500/100 = 175.
+ 
+
+Cursores Implícitos e Explícitos
+Cursores explícitos
+Os comandos %FOUND %NOTFOUND %ROWCOUNT são atributos do cursor que podem ser utilizados
+para determinar a finalização do loop;
+
+
+dividir em 10 pagamentos
+o usuario informa o valor
+3% sobre tudo financiado
+
+
+
+2000
+
+2000 * 3 / 100
+
+2060 / 10
+
+valor cada parcela será 206
+
+
+
+empresa xpto sistema de calculos de financiamento
+
+Parcelamento em 06 pagamentos 10%
+Parcelamento em 12 pagamentos 15%
+Parcelamento em 18 pagamentos 20%
+
+
+
+No final, informar o valor da compra, o valor da entrada, o nº
+de parcelas escolhido para pagamento, bem como seu valor.
+
+
+
+1000
+6
+1100
+
+
+
+
+
+
+
+
+
+
+
+ 
+

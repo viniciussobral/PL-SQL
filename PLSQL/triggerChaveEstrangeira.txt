@@ -1,0 +1,25 @@
+CREATE OR REPLACE TRIGGER t_boss_final AFTER UPDATE ON fonte REFERENCING OLD AS O NEW AS N FOR EACH ROW
+  BEGIN
+    if :O.id_dpto = 102 then
+      INSERT INTO copia VALUES (:N.ID, :N.NOME, :N.RUA, :N.id_dpto, USER || ' ' || TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS'));
+    end if;
+  END;
+
+DROP TABLE fonte;
+DROP TABLE copia;
+DROP TABLE estrangeira;
+CREATE TABLE copia (m_id INT, m_nome VARCHAR2(50), m_rua VARCHAR2(50), m_id_dpto int, alteracao VARCHAR2(500));
+CREATE TABLE estrangeira (ref int primary key, descricao varchar2(50), dono varchar2(50));
+CREATE TABLE fonte (id INT primary key, nome VARCHAR2(50), rua VARCHAR2(50), id_dpto int, foreign key (id_dpto) references estrangeira(ref));
+INSERT INTO estrangeira VALUES (101, 'comercial', 'andrey');
+INSERT INTO estrangeira VALUES (102, 'comercial', 'molina');
+INSERT INTO estrangeira VALUES (103, 'limpeza', 'andrey');
+INSERT INTO fonte VALUES (1, 'caio', 'itororó', 101);
+INSERT INTO fonte VALUES (2, 'cesar', 'santa', 102);
+INSERT INTO fonte VALUES (3, 'ramos', 'luzia', 103);
+UPDATE fonte SET nome = 'joão' WHERE id = 1;
+UPDATE fonte SET rua = 'pará' WHERE id = 2;
+UPDATE fonte SET id = 4 WHERE id = 3;
+SELECT * FROM fonte;
+SELECT * FROM copia;
+SELECT * FROM estrangeira;

@@ -1,0 +1,47 @@
+CREATE OR REPLACE TRIGGER t_boss_final after UPDATE ON fonte REFERENCING OLD AS O NEW AS N FOR EACH ROW
+  BEGIN
+    t_api.fonte_row_change(p_id => :N.id, p_nome => :N.nome, p_rua => :N.rua, p_id_dpto => :N.id_dpto);
+    t_api.insercao_copia;
+  END;
+
+create or replace package body t_api as
+procedure fonte_row_change (p_id in int, p_nome in varchar2, p_rua in varchar2, p_id_dpto in int)is
+  begin
+    insert into fonte_mods (t_id, t_nome,  t_rua, t_id_dpto, t_alteracao) values (p_id, p_nome, p_rua, p_id_dpto, USER || ' ' || TO_CHAR(SYSDATE, 'DD-MM-YYYY HH24:MI:SS'));
+  end fonte_row_change;
+procedure insercao_copia is
+  begin
+  declare
+    v_dono varchar2(50);
+    begin
+      select estrangeira.dono into v_dono from estrangeira, fonte_mods where estrangeira.ref = fonte_mods.t_id_dpto;
+      if v_dono = 'alexandre' then
+        insert into copia select * from fonte_mods;
+      end if;
+      delete from fonte_mods;
+    end;
+  end insercao_copia;
+end t_api;
+
+
+drop table fonte_mods;
+DROP TABLE fonte;
+DROP TABLE copia;
+DROP TABLE estrangeira;
+create global temporary table fonte_mods (t_id int, t_nome varchar2(50), t_rua varchar2(50), t_id_dpto int, t_alteracao varchar(500));
+CREATE TABLE copia (m_id INT primary key, m_nome VARCHAR2(50), m_rua VARCHAR2(50), m_id_dpto int, alteracao VARCHAR2(500));
+CREATE TABLE estrangeira (ref int primary key, descricao varchar2(50), dono varchar2(50));
+CREATE TABLE fonte (id INT primary key, nome VARCHAR2(50), rua VARCHAR2(50), id_dpto int, foreign key (id_dpto) references estrangeira(ref));
+INSERT INTO estrangeira VALUES (101, 'comercial', 'alexandre');
+INSERT INTO estrangeira VALUES (102, 'ti', 'molina');
+INSERT INTO estrangeira VALUES (103, 'limpeza', 'alexandre');
+INSERT INTO fonte VALUES (1, 'caio', 'itororó', 101);
+INSERT INTO fonte VALUES (2, 'cesar', 'santa', 102);
+INSERT INTO fonte VALUES (3, 'ramos', 'luzia', 103);
+UPDATE fonte SET nome = 'joão' WHERE id = 1;
+UPDATE fonte SET rua = 'pará' WHERE id = 2;
+UPDATE fonte SET id = 4 WHERE id = 3;
+SELECT * FROM fonte;
+SELECT * FROM copia;
+SELECT * FROM estrangeira;
+select * from fonte_mods;
