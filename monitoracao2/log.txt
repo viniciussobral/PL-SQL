@@ -1,0 +1,12 @@
+jun 26, 2020 8:17:37 PM executavel.App main
+WARNING: my_log
+jun 26, 2020 8:17:37 PM executavel.App main
+SEVERE: Seveve msg
+jun 26, 2020 8:21:42 PM executavel.App main
+WARNING: my_log
+jun 26, 2020 8:21:42 PM executavel.App main
+SEVERE: Seveve msg
+jun 26, 2020 8:26:19 PM executavel.App main
+WARNING: my_log
+jun 26, 2020 8:26:19 PM executavel.App main
+SEVERE: Seveve msg
